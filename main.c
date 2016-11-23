@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+void calculoNaoSuportado()
+{
+	printf("Erro, calculo nao suportado!");
+}
+
 void interpretarCalculo(char entrada[], float saida[])
 {
 	char token[5];

@@ -9,21 +9,13 @@ void calculoNaoSuportado()
 
 void interpretarCalculo(char entrada[], float saida[])
 {
-	char *token;
-	int ordem = 0;
-	token = strtok(entrada, " ");
-	while(token != NULL) 
-	{
-		if(ordem == 1)
-			saida[ordem++] = (!strcmp(token, "+") ? (1.f) : (
+	char token[5];
+	sscanf(entrada, "%f %s %f", &saida[0], token, &saida[2]);
+
+	saida[1] = (!strcmp(token, "+") ? (1.f) : (
 								(!strcmp(token, "-") ? (2.f) : (
 									(!strcmp(token, "*") ? (3.f) : (
 										(!strcmp(token, "/") ? (4.f) : (0.f))))))));
-		else
-			saida[ordem++] = atof(token);
-
-		token = strtok(NULL, " ");
-	}
 }
 
 float calcular(float valor1, float valor2, float operacao)
@@ -53,16 +45,15 @@ int main()
 	float saida[3];
 	float resultado;
 
-	printf("Escreva uma operação:");
-	scanf(entrada, "%s");
-	while(!strcmp(entrada, "sair"))
+	printf("\nEscreva uma operação:");
+	scanf("\n%[^\n]", entrada);
+	while(strcmp(entrada, "sair"))
 	{
-		
 		interpretarCalculo(entrada, saida);
 		resultado = calcular(saida[0], saida[2], saida[1]);
 		printf("Resultado : %.2f", resultado);
-		printf("Escreva uma nova operação:");
-		scanf(entrada, "%s");
+		printf("\nEscreva uma nova operação:");
+		scanf("\n%[^\n]", entrada);
 	}
 	return 0;
 }
